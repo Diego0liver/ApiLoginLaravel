@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Mails\MailController;
 use App\Http\Controllers\ProdutoController;
+use App\Mail\RegistroEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,8 @@ Route::get('/produtos/{id}', [ProdutoController::class, 'show']);
 Route::get('/produtos/nome/{nome}', [ProdutoController::class, 'showNome']);
 Route::post('/resgitro', [AuthController::class, 'registro']);
 Route::post('/login', [AuthController::class, 'login']);
+
+
 
 
 Route::group(['middleware'=>['auth:sanctum']], function(){

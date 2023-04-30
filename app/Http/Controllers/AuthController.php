@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistroEmail;
+
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +30,10 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('token-name')->plainTextToken;
+
+        $user = User::where('email', $request->email)->first();
+        $mail = new RegistroEmail();
+        Mail::to($user)->send($mail);
 
         $response =[
             'user' => $user,
